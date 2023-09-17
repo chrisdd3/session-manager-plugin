@@ -25,8 +25,8 @@ import (
 	"time"
 
 	"github.com/chrisdd3/session-manager-plugin/internal/log"
+	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
-	"github.com/twinj/uuid"
 )
 
 type EXPECTATION int
@@ -860,18 +860,23 @@ func TestPutUuid(t *testing.T) {
 
 			// Get Uuid from string
 			uuidInput, err := uuid.Parse(strInput)
+			// don't get this test, but lets emulate
+			uuidInputPtr := &uuidInput
+			if uuidInput.String() == "00000000-0000-0000-0000-000000000000" {
+				uuidInputPtr = nil
+			}
 
 			err = putUuid(
 				mockLogger,
 				tc.byteArray,
 				tc.offsetStart,
-				uuidInput)
+				uuidInputPtr)
 			if tc.expectation == SUCCESS {
 				assert.Nil(t, err, "%s:%s threw an error when no error was expected.", t.Name(), tc.name)
 				strExpected := tc.expected.(string)
 				uuidOut, _ := uuid.Parse(strExpected)
 				expectedBuffer := get16ByteBuffer()
-				putUuid(mockLogger, expectedBuffer, 0, uuidOut)
+				putUuid(mockLogger, expectedBuffer, 0, &uuidOut)
 				assert.Equal(t, tc.byteArray, expectedBuffer)
 			} else if tc.expectation == ERROR {
 				assert.Error(t, err, "%s:%s did not throw an error when an error was expected.", t.Name(), tc.name)

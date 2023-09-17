@@ -20,7 +20,7 @@ import (
 
 	"github.com/aws/aws-sdk-go/service/ssm"
 	"github.com/chrisdd3/session-manager-plugin/internal/log"
-	"github.com/chrisdd3/session-manager-plugin/internal/sessionmanagerplugin/session"
+	"github.com/chrisdd3/session-manager-plugin/session"
 
 	"github.com/stretchr/testify/assert"
 )

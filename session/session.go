@@ -32,7 +32,7 @@ import (
 	"github.com/chrisdd3/session-manager-plugin/internal/sdkutil"
 	"github.com/chrisdd3/session-manager-plugin/internal/version"
 	"github.com/chrisdd3/session-manager-plugin/session/sessionutil"
-	"github.com/twinj/uuid"
+	"github.com/google/uuid"
 )
 
 const (
@@ -178,7 +178,7 @@ func ValidateInputAndStartSession(args []string, out io.Writer) {
 		}
 	}
 	sdkutil.SetRegionAndProfile(region, profile)
-	clientId := uuid.NewV4().String()
+	clientId := uuid.NewString()
 
 	switch operationName {
 	case StartSessionOperation:
