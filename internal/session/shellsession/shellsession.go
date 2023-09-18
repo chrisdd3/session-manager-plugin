@@ -24,8 +24,8 @@ import (
 	"github.com/chrisdd3/session-manager-plugin/internal/config"
 	"github.com/chrisdd3/session-manager-plugin/internal/log"
 	"github.com/chrisdd3/session-manager-plugin/internal/message"
-	"github.com/chrisdd3/session-manager-plugin/session"
-	"github.com/chrisdd3/session-manager-plugin/session/sessionutil"
+	"github.com/chrisdd3/session-manager-plugin/internal/session"
+	"github.com/chrisdd3/session-manager-plugin/internal/session/sessionutil"
 	terminal "golang.org/x/term"
 )
 

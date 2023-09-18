@@ -31,8 +31,8 @@ import (
 	"github.com/chrisdd3/session-manager-plugin/internal/message"
 	"github.com/chrisdd3/session-manager-plugin/internal/retry"
 	"github.com/chrisdd3/session-manager-plugin/internal/sdkutil"
+	"github.com/chrisdd3/session-manager-plugin/internal/session/sessionutil"
 	"github.com/chrisdd3/session-manager-plugin/internal/version"
-	"github.com/chrisdd3/session-manager-plugin/session/sessionutil"
 	"github.com/google/uuid"
 )
 
@@ -118,8 +118,7 @@ var handleStreamMessageResendTimeout = func(session *Session, log log.T) {
 	}()
 }
 
-// easier interface for library calls
-func StartSession(startSessionResp *ssm.StartSessionOutput, startSessionRequest *ssm.StartSessionInput, regionName string, profileName string, endpointUrl string, output io.Writer) {
+func StartSession(startSessionResp *ssm.StartSessionOutput, startSessionRequest *ssm.StartSessionInput, regionName string, profileName string, endpointUrl string, output io.Writer) error {
 
 	sdkutil.SetRegionAndProfile(regionName, profileName)
 	session := Session{
@@ -133,11 +132,7 @@ func StartSession(startSessionResp *ssm.StartSessionOutput, startSessionRequest 
 	}
 
 	log := log.Logger(true, "session-manager-plugin")
-	if err := startSession(&session, log); err != nil {
-		log.Errorf("Cannot perform start session: %v", err)
-		fmt.Fprintf(output, "Cannot perform start session: %v\n", err)
-		return
-	}
+	return startSession(&session, log)
 }
 
 // ValidateInputAndStartSession validates input sent from AWS CLI and starts a session if validation is successful.
