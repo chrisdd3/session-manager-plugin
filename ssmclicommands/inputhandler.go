@@ -20,7 +20,7 @@ import (
 	"io"
 	"strings"
 
-	"github.com/chrisdd3/session-manager-plugin/internal/ssmclicommands/utils"
+	"github.com/chrisdd3/session-manager-plugin/ssmclicommands/utils"
 )
 
 const (

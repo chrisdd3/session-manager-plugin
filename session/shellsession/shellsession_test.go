@@ -29,8 +29,8 @@ import (
 	dataChannelMock "github.com/chrisdd3/session-manager-plugin/internal/datachannel/mocks"
 	"github.com/chrisdd3/session-manager-plugin/internal/log"
 	"github.com/chrisdd3/session-manager-plugin/internal/message"
-	"github.com/chrisdd3/session-manager-plugin/internal/session"
-	"github.com/chrisdd3/session-manager-plugin/internal/session/sessionutil"
+	"github.com/chrisdd3/session-manager-plugin/session"
+	"github.com/chrisdd3/session-manager-plugin/session/sessionutil"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )

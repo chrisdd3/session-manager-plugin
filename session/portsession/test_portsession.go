@@ -19,7 +19,7 @@ import (
 	"github.com/chrisdd3/session-manager-plugin/internal/datachannel"
 	"github.com/chrisdd3/session-manager-plugin/internal/log"
 	"github.com/chrisdd3/session-manager-plugin/internal/message"
-	"github.com/chrisdd3/session-manager-plugin/internal/session"
+	"github.com/chrisdd3/session-manager-plugin/session"
 )
 
 var (
