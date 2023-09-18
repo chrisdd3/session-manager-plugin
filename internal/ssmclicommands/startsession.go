@@ -27,10 +27,10 @@ import (
 	"github.com/chrisdd3/session-manager-plugin/internal/jsonutil"
 	"github.com/chrisdd3/session-manager-plugin/internal/log"
 	"github.com/chrisdd3/session-manager-plugin/internal/sdkutil"
-	"github.com/chrisdd3/session-manager-plugin/session"
-	_ "github.com/chrisdd3/session-manager-plugin/session/portsession"
-	_ "github.com/chrisdd3/session-manager-plugin/session/shellsession"
-	"github.com/chrisdd3/session-manager-plugin/ssmclicommands/utils"
+	"github.com/chrisdd3/session-manager-plugin/internal/session"
+	_ "github.com/chrisdd3/session-manager-plugin/internal/session/portsession"
+	_ "github.com/chrisdd3/session-manager-plugin/internal/session/shellsession"
+	"github.com/chrisdd3/session-manager-plugin/internal/ssmclicommands/utils"
 	"github.com/google/uuid"
 )
 
