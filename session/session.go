@@ -24,6 +24,7 @@ import (
 
 	"github.com/chrisdd3/session-manager-plugin/internal/config"
 
+	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/ssm"
 	"github.com/chrisdd3/session-manager-plugin/internal/datachannel"
 	"github.com/chrisdd3/session-manager-plugin/internal/log"
@@ -115,6 +116,28 @@ var handleStreamMessageResendTimeout = func(session *Session, log log.T) {
 			}
 		}
 	}()
+}
+
+// easier interface for library calls
+func StartSession(startSessionResp *ssm.StartSessionOutput, startSessionRequest *ssm.StartSessionInput, regionName string, profileName string, endpointUrl string, output io.Writer) {
+
+	sdkutil.SetRegionAndProfile(regionName, profileName)
+	session := Session{
+		SessionId:   aws.StringValue(startSessionResp.SessionId),
+		StreamUrl:   aws.StringValue(startSessionResp.StreamUrl),
+		TokenValue:  aws.StringValue(startSessionResp.TokenValue),
+		Endpoint:    endpointUrl,
+		ClientId:    uuid.NewString(),
+		TargetId:    aws.StringValue(startSessionRequest.Target),
+		DataChannel: &datachannel.DataChannel{},
+	}
+
+	log := log.Logger(true, "session-manager-plugin")
+	if err := startSession(&session, log); err != nil {
+		log.Errorf("Cannot perform start session: %v", err)
+		fmt.Fprintf(output, "Cannot perform start session: %v\n", err)
+		return
+	}
 }
 
 // ValidateInputAndStartSession validates input sent from AWS CLI and starts a session if validation is successful.
