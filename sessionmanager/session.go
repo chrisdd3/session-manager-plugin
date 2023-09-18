@@ -7,6 +7,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/ssm"
 	ssmv1 "github.com/aws/aws-sdk-go/service/ssm"
 	"github.com/chrisdd3/session-manager-plugin/internal/session"
+	_ "github.com/chrisdd3/session-manager-plugin/internal/session/portsession"
+	_ "github.com/chrisdd3/session-manager-plugin/internal/session/sessionutil"
+	_ "github.com/chrisdd3/session-manager-plugin/internal/session/shellsession"
 )
 
 func StartSession(startSessionResp *ssm.StartSessionOutput, startSessionRequest *ssm.StartSessionInput, regionName string, profileName string, endpointUrl string, output io.Writer) error {
